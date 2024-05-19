@@ -36,7 +36,36 @@ class PhongHocController extends Controller
         $phonghoc = PhongHoc::where('MaPH', $id)->first();
         return response()->json($phonghoc);
     }
-    function timPH($key) {
-        return PhongHoc::where('TenPH', 'Like', "%$key%")->get();
+    function timPH(Request $key) {
+        $search = $key->search;
+
+        $posts = PhongHoc::where(function($query) use ($search) {
+            $query->where('MaPH', 'like', "%$search%")
+            ->orwhere('TenPH', 'like', "%$search%")
+            ->orwhere('DiaChiPH', 'like', "%$search%");
+        })->get();
+        return response()->json($posts);
+    }
+    function capNhatPH(Request $request, $id) {
+        $phonghoc = PhongHoc::where('MaPH', $id)->first();
+        //return response()->json($phonghoc);
+        if(!$phonghoc) {
+            return response()->json(['message' => 'Phong hoc khong ton tai'], 404);
+        }
+
+        $request->validate([
+            'TenPH' => 'required|string|max:255',
+            'DiaChiPH' => 'required|string|max:255',
+        ]);
+
+        $count = PhongHoc::count() + 1;
+        $maPH = 'PH' . str_pad($count, 3, '0', STR_PAD_LEFT);
+
+        //$phonghoc->MaPH = $maPH;
+        $phonghoc->TenPH = $request->input('TenPH');
+        $phonghoc->DiaChiPH = $request->input("DiaChiPH");
+        $phonghoc->save();
+
+        return response()->json(['message' => 'Cập nhật thành công', 'data' => $phonghoc], 200);
     }
 }

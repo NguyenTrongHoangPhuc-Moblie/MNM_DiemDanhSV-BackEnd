@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PhongHoc extends Model
+class TrinhDo extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['MaPH', 'TenPH', 'DiaChiPH'];
-    protected $primaryKey = 'MaPH';
+    protected $fillable = ['MaTD', 'TenTD'];
+    protected $primaryKey = 'MaTD';
     public $timestamps = false;
-    protected $table = 'PhongHoc';
+    protected $table = 'TrinhDo';
     public $incrementing = false;
     protected $keyType = 'string';
 }
