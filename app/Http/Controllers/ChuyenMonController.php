@@ -7,19 +7,19 @@ use App\Models\ChuyenMon;
 
 class ChuyenMonController extends Controller
 {
-    function themTD(Request $req) {
+    function themCM(Request $req) {
         $ChuyenMon = new ChuyenMon;
-        $ChuyenMon->TenTD = $req->input('TenCM');
+        $ChuyenMon->TenCM = $req->input('TenCM');
         $ChuyenMon->save();
 
         return $ChuyenMon;
     }
 
-    function danhSachTD() {
+    function danhSachCM() {
         return ChuyenMon::all();
     }
 
-    function xoaTD($id) {
+    function xoaCM($id) {
         #return $id;
         $result = ChuyenMon::where('MaCM', $id)->delete();
         if ($result) {
@@ -29,12 +29,12 @@ class ChuyenMonController extends Controller
             return ["result"=>"Thuc thi that bai" ];
         }
     }
-    function layTD($id) {
+    function layCM($id) {
         #return $id;
         $ChuyenMon = ChuyenMon::where('MaCM', $id)->first();
         return response()->json($ChuyenMon);
     }
-    function timTD(Request $key) {
+    function timCM(Request $key) {
         $search = $key->search;
 
         $posts = ChuyenMon::where(function($query) use ($search) {
@@ -43,7 +43,7 @@ class ChuyenMonController extends Controller
         })->get();
         return response()->json($posts);
     }
-    function capNhatTD(Request $request, $id) {
+    function capNhatCM(Request $request, $id) {
         $ChuyenMon = ChuyenMon::where('MaCM', $id)->first();
         //return response()->json($ChuyenMon);
         if(!$ChuyenMon) {

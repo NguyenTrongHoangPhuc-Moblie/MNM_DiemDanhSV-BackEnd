@@ -7,22 +7,22 @@ use App\Models\Khoa;
 
 class KhoaController extends Controller
 {
-    function themNganh(Request $req) {
-        $Nganh = new Nganh;
-        $Nganh->TenNganh = $req->input('TenNganh');
-        $Nganh->SoLuongSV = 0;
-        $Nganh->save();
+    function themKhoa(Request $req) {
+        $Khoa = new Khoa;
+        $Khoa->TenKhoa = $req->input('TenKhoa');
+        $Khoa->SoLuongSV = 0;
+        $Khoa->save();
 
-        return $Nganh;
+        return $Khoa;
     }
 
-    function danhSachNganh() {
-        return Nganh::all();
+    function danhSachKhoa() {
+        return Khoa::all();
     }
 
-    function xoaNganh($id) {
+    function xoaKhoa($id) {
         #return $id;
-        $result = Nganh::where('MaNganh', $id)->delete();
+        $result = Khoa::where('MaKhoa', $id)->delete();
         if ($result) {
             return ["result"=>"Phong da duoc xoa" ];
         }
@@ -30,37 +30,37 @@ class KhoaController extends Controller
             return ["result"=>"Thuc thi that bai" ];
         }
     }
-    function layNganh($id) {
+    function layKhoa($id) {
         #return $id;
-        $Nganh = Nganh::where('MaNganh', $id)->first();
-        return response()->json($Nganh);
+        $Khoa = Khoa::where('MaKhoa', $id)->first();
+        return response()->json($Khoa);
     }
-    function timNganh(Request $key) {
+    function timKhoa(Request $key) {
         $search = $key->search;
 
-        $posts = Nganh::where(function($query) use ($search) {
-            $query->where('MaNganh', 'like', "%$search%")
-            ->orwhere('TenNganh', 'like', "%$search%");
+        $posts = Khoa::where(function($query) use ($search) {
+            $query->where('MaKhoa', 'like', "%$search%")
+            ->orwhere('TenKhoa', 'like', "%$search%");
         })->get();
         return response()->json($posts);
     }
-    function capNhatNganh(Request $request, $id) {
-        $Nganh = Nganh::where('MaNganh', $id)->first();
-        //return response()->json($Nganh);
-        if(!$Nganh) {
+    function capNhatKhoa(Request $request, $id) {
+        $Khoa = Khoa::where('MaKhoa', $id)->first();
+        //return response()->json($Khoa);
+        if(!$Khoa) {
             return response()->json(['message' => 'Mon hoc khong ton tai'], 404);
         }
 
         $request->validate([
-            'TenNganh' => 'required|string|max:255',
+            'TenKhoa' => 'required|string|max:255',
             'SoLuongSV' => 'required|int',
         ]);
 
-        //$Nganh->MaPH = $maPH;
-        $Nganh->TenNganh = $request->input('TenNganh');
-        $Nganh->SoLuongSV = $request->input("SoLuongSV");
-        $Nganh->save();
+        //$Khoa->MaPH = $maPH;
+        $Khoa->TenKhoa = $request->input('TenKhoa');
+        $Khoa->SoLuongSV = $request->input("SoLuongSV");
+        $Khoa->save();
 
-        return response()->json(['message' => 'Cập nhật thành công', 'data' => $Nganh], 200);
+        return response()->json(['message' => 'Cập nhật thành công', 'data' => $Khoa], 200);
     }
 }

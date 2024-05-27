@@ -12,6 +12,7 @@ class MonHocController extends Controller
         $monhoc->TenMH = $req->input('TenMH');
         $monhoc->SoTietLyThuyet = $req->input('SoTietLyThuyet');
         $monhoc->SoTietThucHanh = $req->input('SoTietThucHanh');
+        $monhoc->TongSoTiet = $req->input('TongSoTiet');
         $monhoc->SoTinChi = $req->input('SoTinChi');
         $monhoc->save();
 
@@ -57,6 +58,7 @@ class MonHocController extends Controller
             'TenMH' => 'required|string|max:255',
             'SoTietLyThuyet' => 'required|int',
             'SoTietThucHanh' => 'required|int',
+            'TongSoTiet' => 'required|int',
             'SoTinChi' => 'required|int',
         ]);
 
@@ -67,6 +69,7 @@ class MonHocController extends Controller
         $monhoc->TenMH = $request->input('TenMH');
         $monhoc->SoTietLyThuyet = $request->input("SoTietLyThuyet");
         $monhoc->SoTietThucHanh = $request->input("SoTietThucHanh");
+        $monhoc->TongSoTiet = $request->input("TongSoTiet");
         $monhoc->SoTinChi = $request->input("SoTinChi");
         $monhoc->save();
 
