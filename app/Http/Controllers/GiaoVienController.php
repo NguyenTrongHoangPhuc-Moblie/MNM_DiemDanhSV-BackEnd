@@ -10,7 +10,7 @@ class GiaoVienController extends Controller
 {
     public function index()
     {
-        $gv = GiaoVien::withCM('ChuyenMon', 'TrinhDo')->get();
+        $gv = GiaoVien::with('ChuyenMon', 'TrinhDo')->get();
 
         return response()->json([
             'success' => true,

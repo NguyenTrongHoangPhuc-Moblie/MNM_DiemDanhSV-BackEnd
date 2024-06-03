@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NguoiDung;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class NguoiDungController extends Controller
 {
@@ -29,5 +30,20 @@ class NguoiDungController extends Controller
             return ["error"=>"Email or MatKhau is not matched"];
         }
         return $user;
+    }
+
+    function kiemTraPQ($email) {
+        $events = DB::table('NguoiDung AS nd')
+        ->select(
+            'pq.TenNhomQuyen'
+        )
+        ->join('NguoiDung_PhanQuyen AS ndpq', 'ndpq.MaND', '=', 'nd.MaND')
+        ->join('PhanQuyen AS pq', 'pq.MaPQ', '=', 'ndpq.MaPQ')
+        ->where("nd.Email", $email)
+        ->first();
+
+        return response()->json([
+            $events
+        ]);
     }
 }

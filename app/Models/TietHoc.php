@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Khoa extends Model
+class TietHoc extends Model
 {
     use HasFactory;
-    protected $fillable = ['MaKhoa', 'TenKhoa', 'SoLuongSV'];
-    protected $primaryKey = 'MaKhoa';
+    protected $fillable = ['MaTH', 'TenTH', 'GioBD', 'GioKT'];
+    protected $primaryKey = 'MaTH';
     public $timestamps = false;
-    protected $table = 'Khoa';
+    protected $table = 'TietHoc';
     public $incrementing = false;
     protected $keyType = 'string';
-    public function SinhVien() : HasMany{
-        return $this->hasMany(SinhVien::class, 'MaKhoa', 'MaKhoa');
+    public function ChiTietNgayHoc() : HasMany{
+        return $this->hasMany(ChiTietNgayHoc::class, 'MaTH', 'MaTH');
     }
 }

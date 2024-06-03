@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ChuyenMon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GiaoVien extends Model
 {
@@ -24,5 +25,9 @@ class GiaoVien extends Model
 
     public function TrinhDo() : BelongsTo {
         return $this->belongsTo(TrinhDo::class, 'MaTD', 'MaTD');
+    }
+
+    public function LopHocPhan() : HasMany{
+        return $this->hasMany(LopHocPhan::class, 'MaGV', 'MaGV');
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\BangDiemDanhController;
+use App\Http\Controllers\DanhSachSinhVien_LopHocPhanController;
+use App\Http\Controllers\LopNienCheController;
+use App\Http\Controllers\SinhVienController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NguoiDungController;
@@ -11,6 +15,12 @@ use App\Http\Controllers\KhoaController;
 use App\Http\Controllers\ChuyenMonController;
 use App\Http\Controllers\GiaoVienController;
 use App\Http\Controllers\LichHocController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\LopHocPhanController;
+use App\Http\Controllers\ChiTietNgayHocController;
+use App\Http\Controllers\NgayHocController;
+use App\Http\Controllers\TietHocController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +44,7 @@ Route::middleware('auth:api')->get('/user', function(Request $request){
 Route::get('nguoidung', [NguoiDungController::class, 'index']);
 Route::post('register', [NguoiDungController::class, 'register']);
 Route::post('login', [NguoiDungController::class, 'login']);
+Route::get('kiemTraPQ/{id}', [NguoiDungController::class, 'kiemTraPQ']);
 //PhongHoc
 Route::post('themPH', [PhongHocController::class, 'themPhongHoc']);
 Route::get('danhSachPH', [PhongHocController::class, 'danhSachPH']);
@@ -90,3 +101,50 @@ Route::delete('xoaTGH/{id}', [LichHocController::class, 'xoaTGH']);
 Route::get('layTGH/{id}', [LichHocController::class, 'layTGH']);
 Route::get('timTGH/{key}', [LichHocController::class, 'timTGH']);
 Route::post('suaTGH/{id}', [LichHocController::class, 'capNhatTGH']);
+//LopHocPhan
+Route::post('themLHP', [LopHocPhanController::class, 'themLHP']);
+Route::get('danhSachLHP', [LopHocPhanController::class, 'danhSachLHP']);
+Route::delete('xoaLHP/{id}', [LopHocPhanController::class, 'xoaLHP']);
+Route::get('layLHP/{id}', [LopHocPhanController::class, 'layLHP']);
+Route::get('timLHP/{key}', [LopHocPhanController::class, 'timLHP']);
+Route::post('suaLHP/{id}', [LopHocPhanController::class, 'capNhatLHP']);
+//ChiTietNgayHoc
+Route::post('themCTNH', [ChiTietNgayHocController::class, 'themCTNH']);
+Route::get('danhSachCTNH', [ChiTietNgayHocController::class, 'danhSachCTNH']);
+Route::delete('xoaCTNH/{id}', [ChiTietNgayHocController::class, 'xoaCTNH']);
+Route::get('layCTNH/{id}', [ChiTietNgayHocController::class, 'layCTNH']);
+Route::get('timCTNH/{key}', [ChiTietNgayHocController::class, 'timCTNH']);
+Route::post('suaCTNH/{id}', [ChiTietNgayHocController::class, 'capNhatCTNH']);
+//LopNienChe
+Route::post('themLNC', [LopNienCheController::class, 'themLNC']);
+Route::get('danhSachLNC', [LopNienCheController::class, 'danhSachLNC']);
+Route::delete('xoaLNC/{id}', [LopNienCheController::class, 'xoaLNC']);
+Route::get('layLNC/{id}', [LopNienCheController::class, 'layLNC']);
+Route::get('timLNC/{key}', [LopNienCheController::class, 'timLNC']);
+Route::post('suaLNC/{id}', [LopNienCheController::class, 'capNhatLNC']);
+//TietHoc
+Route::post('themTH', [TietHocController::class, 'themTH']);
+Route::get('danhSachTH', [TietHocController::class, 'danhSachTH']);
+Route::delete('xoaTH/{id}', [TietHocController::class, 'xoaTH']);
+Route::get('layTH/{id}', [TietHocController::class, 'layTH']);
+Route::get('timTH/{key}', [TietHocController::class, 'timTH']);
+Route::post('suaTH/{id}', [TietHocController::class, 'capNhatTH']);
+//SinhVien
+Route::post('themSV', [SinhVienController::class, 'themSV']);
+Route::get('danhSachSV', [SinhVienController::class, 'danhSachSV']);
+Route::delete('xoaSV/{id}', [SinhVienController::class, 'xoaSV']);
+Route::get('laySV/{id}', [SinhVienController::class, 'laySV']);
+Route::get('timSV/{key}', [SinhVienController::class, 'timSV']);
+Route::post('suaSV/{id}', [SinhVienController::class, 'capNhatSV']);
+//SinhVien
+Route::post('themDSSV_LHP', [DanhSachSinhVien_LopHocPhanController::class, 'themDSSV_LHP']);
+Route::get('danhSachDSSV_LHP', [DanhSachSinhVien_LopHocPhanController::class, 'danhSachDSSV_LHP']);
+Route::delete('xoaDSSV_LHP/{masv}/{malop}', [DanhSachSinhVien_LopHocPhanController::class, 'xoaDSSV_LHP']);
+Route::get('layDSSV_LHP/{masv}/{malop}', [DanhSachSinhVien_LopHocPhanController::class, 'layDSSV_LHP']);
+Route::get('timDSSV_LHP/{masv}/{malop}', [DanhSachSinhVien_LopHocPhanController::class, 'timDSSV_LHP']);
+Route::post('suaDSSV_LHP/{masv}/{malop}', [DanhSachSinhVien_LopHocPhanController::class, 'capNhatDSSV_LHP']);
+//Calendar
+Route::get('danhSachCalendar', [CalendarController::class, 'danhSachCalendar']);
+//BangDiemDanh
+Route::post('themBDD', [BangDiemDanhController::class, 'themBDD']);
+Route::get('danhSachBDD/{tenlop}', [BangDiemDanhController::class, 'danhSachBDD']);

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MonHoc extends Model
 {
@@ -15,4 +16,7 @@ class MonHoc extends Model
     protected $table = 'MonHoc';
     public $incrementing = false;
     protected $keyType = 'string';
+    public function LopHocPhan() : HasMany{
+        return $this->hasMany(LopHocPhan::class, 'MaMH', 'MaMH');
+    }
 }
